@@ -1,6 +1,6 @@
 [package]
 name = "near-workspaces-tools"
-version = "1.0.2"
+version = "1.0.3"
 edition = "2024"
 authors = ["1ogon1"]
 description = "Tools for working with near-workspaces"
@@ -14,7 +14,8 @@ show_logs = []
 show_default_output = []
 
 [dependencies]
-serde = "1.0.228"
+serde_json = "1.0"
 async-trait = "0.1.89"
 tokio = { version = "1.49.0", features = ["full"] }
+serde = { version = "1.0.228", features = ["derive"] }
 near-workspaces = { version = "0.22.1", features = ["unstable"] }
