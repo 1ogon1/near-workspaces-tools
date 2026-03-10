@@ -1,6 +1,6 @@
 [package]
 name = "near-workspaces-tools"
-version = "1.0.3"
+version = "1.0.4"
 edition = "2024"
 authors = ["1ogon1"]
 description = "Tools for working with near-workspaces"
