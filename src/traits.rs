@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 use async_trait::async_trait;
 use near_workspaces::{Worker, network::Sandbox, result::ExecutionSuccess};
 use serde::de::DeserializeOwned;
@@ -34,4 +36,8 @@ pub trait TimestampExtension {
 pub trait U128Extensions {
     fn to_decimals(self, decimals: TokenDecimals) -> u128;
     fn strip_decimals(self, decimals: TokenDecimals) -> u128;
+}
+
+pub trait GenericExtension<T: PartialEq + Debug> {
+    fn assert_eq(self, expect: T, message: &str) -> T;
 }

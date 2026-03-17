@@ -1,3 +1,5 @@
+use std::fmt::Debug;
+
 use async_trait::async_trait;
 use near_workspaces::{
     Worker,
@@ -8,8 +10,8 @@ use serde::de::DeserializeOwned;
 
 use crate::{
     CallExecutionDetailsExtension, CallExecutionDetailsHelper, CallExecutionResult,
-    SHOW_DEFAULT_OUTPUT, SHOW_LOGS, Timestamp, ViewExecutionResult, ViewResultDetailsExtension,
-    ViewResultDetailsHelper,
+    GenericExtension, SHOW_DEFAULT_OUTPUT, SHOW_LOGS, Timestamp, ViewExecutionResult,
+    ViewResultDetailsExtension, ViewResultDetailsHelper,
 };
 
 impl ViewResultDetailsExtension for ViewExecutionResult {
@@ -240,5 +242,15 @@ impl CallExecutionDetailsHelper for ExecutionFailure {
 
     async fn get_block_timestamp(&self, _worker: &Worker<Sandbox>) -> Timestamp {
         unimplemented!("Failed transaction has no block timestamp")
+    }
+}
+
+impl<T> GenericExtension<T> for T
+where
+    T: PartialEq + Debug,
+{
+    fn assert_eq(self, expect: T, message: &str) -> T {
+        assert_eq!(self, expect, "{}", message);
+        self
     }
 }
